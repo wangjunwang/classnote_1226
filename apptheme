@@ -1,0 +1,127 @@
+// =========================================================
+// 1. 定义单套主题色的接口
+// =========================================================
+export interface ThemeColorSet {
+  accent: string | Resource      // 主题色
+  accentLight: string | Resource // 浅色背景 (标签等)
+  heroGradient: [string | Resource, number][] // 渐变色
+}
+
+// =========================================================
+// 2. 定义所有可用主题的配置池 (已优化绿色)
+// =========================================================
+export const ThemeConfig: Record<string, ThemeColorSet> = {
+  // 🍊 活力橙 (默认)
+  'orange': {
+    accent: '#FF8800',
+    accentLight: '#FFF0D6',
+    heroGradient: [['#FF8800', 0.0], ['#FFBB00', 1.0]]
+  },
+  // 🔵 科技蓝
+  'blue': {
+    accent: '#007DFF',
+    accentLight: '#E6F2FF',
+    heroGradient: [['#007DFF', 0.0], ['#00B4FF', 1.0]]
+  },
+  // 🌿 [优化] 森之绿 (更护眼、更高级的翡翠绿)
+  'green': {
+    accent: '#10B981', // Emerald 500
+    accentLight: '#D1FAE5', // Emerald 50
+    heroGradient: [['#059669', 0.0], ['#34D399', 1.0]] // Emerald 600 -> 400
+  },
+  // 🟣 梦幻紫
+  'purple': {
+    accent: '#8B5CF6',
+    accentLight: '#F3E8FF',
+    heroGradient: [['#7C3AED', 0.0], ['#C4B5FD', 1.0]]
+  },
+  // 🏖️ 海岛假日 (暖色系)
+  'beach': {
+    accent: '#E76F51',
+    accentLight: 'rgba(244, 162, 97, 0.2)',
+    heroGradient: [['#E76F51', 0.0], ['#E9C46A', 1.0]]
+  },
+  // 🌊 深海迷航 (冷色系)
+  'ocean': {
+    accent: '#2A9D8F',
+    accentLight: 'rgba(42, 157, 143, 0.15)',
+    heroGradient: [['#264653', 0.0], ['#2A9D8F', 1.0]]
+  }
+}
+
+// =========================================================
+// 3. 基础配色定义
+// =========================================================
+export class ThemePalette {
+  bgGradient: [string | Resource, number][] = []
+  card: string | Resource = ''
+  textPrimary: string | Resource = ''
+  textSecondary: string | Resource = ''
+  divider: string | Resource = ''
+  inputBg: string | Resource = ''
+  placeholder: string | Resource = ''
+  dockBg: string | Resource = ''
+  shadow: string | Resource = ''
+  heroGradient: [string | Resource, number][] = []
+  funcGradient: [string | Resource, number][] = []
+}
+
+export class ThemeColors {
+  primary: string | Resource = ''
+  // 兼容旧代码的占位符，实际会走 ThemeConfig
+  accent: string | Resource = ''
+  accentLight: string | Resource = ''
+  light: ThemePalette = new ThemePalette()
+  dark: ThemePalette = new ThemePalette()
+}
+
+export class ThemeLayout {
+  radius: number = 0
+  cardPadding: number = 0
+}
+
+export class Theme {
+  static readonly layout: ThemeLayout = {
+    radius: 24,
+    cardPadding: 20
+  }
+
+  // [核心方法] 获取当前主题色
+  static getStyle(themeName: string): ThemeColorSet {
+    return ThemeConfig[themeName] || ThemeConfig['orange'];
+  }
+
+  static readonly colors: ThemeColors = {
+    primary: '#007DFF',
+    accent: '#FF8800',
+    accentLight: '#FFF0D6',
+
+    light: {
+      bgGradient: [['#FEF9F5', 0.0], ['#F2F3F5', 1.0]],
+      card: '#FFFFFF',
+      textPrimary: '#1F2937',
+      textSecondary: '#94A3B8',
+      divider: '#F1F5F9',
+      inputBg: '#F5F7FA',
+      placeholder: '#999999',
+      dockBg: 'rgba(255,255,255,0.85)',
+      shadow: 'rgba(59, 130, 246, 0.05)',
+      heroGradient: [['#FF8800', 0.0], ['#FFBB00', 1.0]],
+      funcGradient: [['#FF9F40', 0.0], ['#FFC880', 1.0]]
+    },
+
+    dark: {
+      bgGradient: [['#1A1A1A', 0.0], ['#000000', 1.0]],
+      card: '#2D2D2D',
+      textPrimary: '#FFFFFF',
+      textSecondary: 'rgba(255,255,255,0.6)',
+      divider: '#3D3D3D',
+      inputBg: '#3D3D3D',
+      placeholder: '#666666',
+      dockBg: 'rgba(45,45,45,0.85)',
+      shadow: 'rgba(0,0,0,0.3)',
+      heroGradient: [['#8A4E00', 0.0], ['#5C3300', 1.0]],
+      funcGradient: [['#3D3D3D', 0.0], ['#4D4D4D', 1.0]]
+    }
+  }
+}
