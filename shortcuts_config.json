@@ -1,0 +1,49 @@
+{
+  "shortcuts": [
+    {
+      "shortcutId": "add_course",
+      "label": "$string:shortcut_add_course",
+      "icon": "$media:startIcon",
+      "wants": [
+        {
+          "bundleName": "com.example.classnote",
+          "moduleName": "entry",
+          "abilityName": "EntryAbility",
+          "parameters": {
+            "shortcutAction": "action_add_course"
+          }
+        }
+      ]
+    },
+    {
+      "shortcutId": "add_add_student",
+      "label": "$string:shortcut_add_student",
+      "icon": "$media:startIcon",
+      "wants": [
+        {
+          "bundleName": "com.example.classnote",
+          "moduleName": "entry",
+          "abilityName": "EntryAbility",
+          "parameters": {
+            "shortcutAction": "action_add_student"
+          }
+        }
+      ]
+    },
+    {
+      "shortcutId": "add_todo",
+      "label": "$string:shortcut_add_todo",
+      "icon": "$media:startIcon",
+      "wants": [
+        {
+          "bundleName": "com.example.classnote",
+          "moduleName": "entry",
+          "abilityName": "EntryAbility",
+          "parameters": {
+            "shortcutAction": "action_add_todo"
+          }
+        }
+      ]
+    }
+  ]
+}
